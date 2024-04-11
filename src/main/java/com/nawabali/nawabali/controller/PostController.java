@@ -2,6 +2,7 @@ package com.nawabali.nawabali.controller;
 
 
 import com.nawabali.nawabali.domain.elasticsearch.PostSearch;
+import com.nawabali.nawabali.constant.Town;
 import com.nawabali.nawabali.dto.PostDto;
 import com.nawabali.nawabali.dto.querydsl.PostDslDto;
 import com.nawabali.nawabali.security.UserDetailsImpl;
@@ -128,6 +129,13 @@ public class PostController {
     public ResponseEntity<List<PostSearch>> searchPost(@RequestParam("query") String contents) {
         List<PostSearch> postDslDto = postSearchService.searchByContents(contents);
         return ResponseEntity.ok(postDslDto);
+    }
+
+    @Operation(summary = "동네별 점수 조회", description = "동네(구)를 넣으면 총 게시물 수 / 좋아요 수 / 동네인증 수 조회 가능합니다")
+    @GetMapping("/district/{district}")
+    public ResponseEntity<PostDto.DistrictDto> districtMap(@PathVariable String district, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        PostDto.DistrictDto districtDto = postService.districtMap(district, userDetails.getUser());
+        return ResponseEntity.ok(districtDto);
     }
 }
 

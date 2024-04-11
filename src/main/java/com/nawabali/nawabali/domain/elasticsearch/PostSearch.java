@@ -1,14 +1,15 @@
 package com.nawabali.nawabali.domain.elasticsearch;
 
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import lombok.*;
+import org.springframework.data.elasticsearch.annotations.*;
 
 @Document(indexName = "post")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
+@Setting(settingPath = "elastic/es-setting.json")
+@Mapping(mappingPath = "elastic/es-mapping.json")
 public class PostSearch {
 
     @Id

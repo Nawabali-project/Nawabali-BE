@@ -71,11 +71,16 @@ public class PostService {
             post.addImage(image);
         });
 
-        Post elpost = postRepository.save(post);
+        // 게시물 저장
+        Post savedPost = postRepository.save(post);
+
+        // Elasticsearch에 저장할 게시물 정보 생성 및 저장
         PostSearch postSearch = new PostSearch();
-        postSearch.setContents(post.getContents());
-        postSearch.setPostId(elpost.getId());
+        postSearch.setContents(savedPost.getContents());
+        postSearch.setPostId(savedPost.getId());
+
         postSearchRepository.save(postSearch);
+
 
         return new PostDto.ResponseDto(post);
 
@@ -182,7 +187,7 @@ public class PostService {
     }
 
 
-    // 게시물 검색
+    // 게시물 검색(dsl 사용)
     public List<PostDslDto.SearchDto> searchPost(String contents) {
         return postRepository.findSearchByPosts(contents);
     }

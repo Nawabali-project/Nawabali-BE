@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping("/ping")
     public String check() {
-        return "기존 서버입니다.";
+        return "무중단배포 성공! 0.1초 안에 기존에서 신규 서버로 교체 완료되었습니다.";
     }
 }

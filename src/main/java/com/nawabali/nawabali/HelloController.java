@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping("/ping")
     public String check() {
-        return "Pong! Zero-Downtime deployment succeeded";
+        return "Pong! 무중단배포 #1";
     }
 }

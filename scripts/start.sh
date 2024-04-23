@@ -32,7 +32,7 @@ echo "> $JAR_NAME 를 profile=$IDLE_PROFILE 로 실행합니다."
 
 # 쉬고 있던 프로필로 jar파일을 백그라운드 실행
 nohup java -jar \
-    -Dspring.config.location="classpath:/application.properties, classpath:/application-$IDLE_PROFILE.properties" \
+    -Dspring.config.location="classpath:/application.properties, /home/ubuntu/app/step3/zip/application-$IDLE_PROFILE.properties" \
     -Dspring.profiles.active=$IDLE_PROFILE \
     $JAR_NAME > $REPOSITORY/application.log 2>&1 &
 

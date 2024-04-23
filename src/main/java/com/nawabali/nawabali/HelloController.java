@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping("/ping")
     public String check() {
-        return "Pong! 무중단배포 #3";
+        return "Pong! 무중단배포 #4";
     }
 }

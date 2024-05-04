@@ -57,7 +57,7 @@ public class UserService {
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
-//        cookie.setDomain("dongnaebangnae.com");
+        cookie.setDomain("dongnaebangnae.com");
         response.addCookie(cookie);
 
         String headerAccessToken = jwtUtil.getJwtFromHeader(request);

@@ -122,9 +122,8 @@ public class WebSecurityConfig {
                                 .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
-//        http.logout(logoutconfigurer->logoutconfigurer
-//                .logoutUrl("/users/logout")
-//                .logoutSuccessUrl("/")
+        http.logout(logoutconfigurer->logoutconfigurer
+                .logoutUrl("/users/logout"));
 //                .addLogoutHandler(jwtLogoutHandler));
 
         // 필터 관리

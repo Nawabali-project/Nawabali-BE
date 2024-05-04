@@ -35,7 +35,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestParam(name = "accessToken", required = false) HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response){
         return userService.logout(request, response);
     }
 

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping("/ping")
     public String check() {
-        return "Pong! BEARER_PREFIX 추가";
+        return "Pong! 로그아웃핸들러 변경";
     }
 }

@@ -32,25 +32,30 @@ public class JwtLogoutHandler implements LogoutHandler {
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
         response.addCookie(cookie);
 
-        // refresh 토큰 삭제
-        log.info("refreshToken 삭제");
-        String accessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
-        if(StringUtils.hasText(accessToken)){
-            accessToken = jwtUtil.substringToken(accessToken);
-            String refreshToken = redisTool.getValues(accessToken);
-            if(!refreshToken.equals("false")){
-                redisTool.deleteValues(accessToken);
+        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
+        String cookieAccessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
+        log.info("accessToken : " + headerAccessToken);
+        log.info("cookieAccessToken : " + cookieAccessToken);
 
-                //access의 남은 유효시간만큼  redis에 블랙리스트로 저장
-                log.info("redis에 블랙리스트 저장");
-                Long remainedExpiration = jwtUtil.getUserInfoFromToken(accessToken).getExpiration().getTime();
-                Long now = new Date().getTime();
-                if(remainedExpiration > now){
-                    long newExpiration = remainedExpiration - now;
-                    redisTool.setValues(accessToken, "logout", Duration.ofMillis(newExpiration));
-                }
-            }
-        }
+        // refresh 토큰 삭제
+//        log.info("refreshToken 삭제");
+//        String accessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
+//        if(StringUtils.hasText(accessToken)){
+//            accessToken = jwtUtil.substringToken(accessToken);
+//            String refreshToken = redisTool.getValues(accessToken);
+//            if(!refreshToken.equals("false")){
+//                redisTool.deleteValues(accessToken);
+//
+//                //access의 남은 유효시간만큼  redis에 블랙리스트로 저장
+//                log.info("redis에 블랙리스트 저장");
+//                Long remainedExpiration = jwtUtil.getUserInfoFromToken(accessToken).getExpiration().getTime();
+//                Long now = new Date().getTime();
+//                if(remainedExpiration > now){
+//                    long newExpiration = remainedExpiration - now;
+//                    redisTool.setValues(accessToken, "logout", Duration.ofMillis(newExpiration));
+//                }
+//            }
+//        }
 
 
     }

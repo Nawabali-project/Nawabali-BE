@@ -41,11 +41,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
-        String bearerAccessToken = jwtUtil.getTokenFromCookieAndName(req, JwtUtil.AUTHORIZATION_HEADER);
-        log.info(bearerAccessToken);
-        String accessToken = jwtUtil.substringToken(bearerAccessToken);
-//        String accessToken = jwtUtil.getJwtFromHeader(req);
-//        log.info("accessToken : "+ accessToken);
+//        String accessToken = jwtUtil.getTokenFromCookieAndName(req, JwtUtil.AUTHORIZATION_HEADER);
+        String accessToken = jwtUtil.getJwtFromHeader(req);
+        log.info("accessToken : "+ accessToken);
         if(StringUtils.hasText(accessToken)){
             // 토큰 유무 확인
 //            accessToken = jwtUtil.substringToken(accessToken);
@@ -70,16 +68,15 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     // 새로운 access, refresh Token 발행
                     String newAccessToken = jwtUtil.createAccessToken(email, role);
                     String newRefreshToken = jwtUtil.createRefreshToken(email);
-                    Cookie newAccessCookie = jwtUtil.createAccessCookie(newAccessToken);
                     log.info("발급한 유저의 email : " + email);
 
                     res.addHeader(JwtUtil.AUTHORIZATION_HEADER, newAccessToken);
-                    res.addCookie(newAccessCookie);
+//                    res.addHeader(JwtUtil.AUTHORIZATION_HEADER, String.format("%s; Secure; HttpOnly; SameSite=None;",newAccessToken));
+
                     redisTool.deleteValues(accessToken);
                     log.info("기존 refreshToken 삭제 key :" + accessToken );
                     redisTool.setValues(jwtUtil.substringToken(newAccessToken), newRefreshToken, Duration.ofMillis(jwtUtil.REFRESH_EXPIRATION_TIME));
-//                    redisTool.setValues(newAccessToken, newRefreshToken, Duration.ofMillis(jwtUtil.REFRESH_EXPIRATION_TIME));
-                    log.info("refreshToken 재발급 완료 key : " + newAccessToken);
+                    log.info("refreshToken 재발급 완료 key : " + jwtUtil.substringToken(newAccessToken));
 
                     try{
                         setAuthentication(info.getSubject());

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="sparta@new-db-dongnaebangnae.cbe6ouewo4p0.ap-northeast-2.rds.amazonaws.com" uuid="b08f3687-7234-409e-9dd3-6b42c01a193a">
+    <data-source source="LOCAL" name="sparta@new-db-dongnaebangnae.cbe6ouewo4p0.ap-northeast-2.rds.amazonaws.com" uuid="de69a757-2727-4826-aad5-3dc3dc84bd95">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://new-db-dongnaebangnae.cbe6ouewo4p0.ap-northeast-2.rds.amazonaws.com:3306/sparta</jdbc-url>
       <jdbc-additional-properties>

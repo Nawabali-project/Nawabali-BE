@@ -24,10 +24,11 @@ public class KakaoController {
                                                                     HttpServletResponse response)
             throws JsonProcessingException, IOException {
 
-       String accessToken = kakaoService.kakaoLogin(code, response);
+       kakaoService.kakaoLogin(code, response);
 
 //       return "redirect:https://www.dongnaebangnae.com/?accessToken=" + accessToken;
-       return "redirect:https://www.dongnaebangnae.com";
+        return "redirect:https://dongnaebangnae.vercel.app";
+//       return "redirect:https://www.dongnaebangnae.com";
 
     }
 }

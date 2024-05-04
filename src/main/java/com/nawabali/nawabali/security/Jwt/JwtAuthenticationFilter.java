@@ -9,13 +9,13 @@ import com.nawabali.nawabali.exception.ErrorCode;
 import com.nawabali.nawabali.global.tool.redis.RedisTool;
 import com.nawabali.nawabali.repository.UserRepository;
 import com.nawabali.nawabali.security.UserDetailsImpl;
+import io.jsonwebtoken.Jwt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -74,19 +74,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("user email : " + username, role);
         log.info("accessCookie value : " + accessCookie.getValue());
         log.info("refreshCookie value : " + refreshCookie.getValue());
-
-
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
-
-        // same-site 없는 버전
-        response.addCookie(accessCookie);
-//        response.addHeader("Set-Cookie", jwtUtil.createResponseCookie(token));
+//        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, String.format("%s; Secure; HttpOnly; SameSite=None;",token));
 
         // refresh 토큰 redis에 저장
-        // substring 제외
         redisTool.setValues(token.substring(7), refreshCookie.getValue(), Duration.ofMillis(jwtUtil.REFRESH_EXPIRATION_TIME));
-//        redisTool.setValues(token, refreshCookie.getValue(), Duration.ofMillis(jwtUtil.REFRESH_EXPIRATION_TIME));
-
 
         // 로그인 성공 메시지를 JSON 형태로 응답 본문에 추가
         response.setContentType("application/json");

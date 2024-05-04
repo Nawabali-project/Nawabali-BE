@@ -18,6 +18,7 @@ import com.nawabali.nawabali.repository.UserRepository;
 import com.nawabali.nawabali.repository.elasticsearch.UserSearchRepository;
 import com.nawabali.nawabali.security.Jwt.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
@@ -51,26 +52,17 @@ public class UserService {
     private final JwtUtil jwtUtil;
     private final RedisTool redisTool;
 
-    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+    public void logout( HttpServletResponse response) {
 
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
-        cookie.setMaxAge(0);
         cookie.setPath("/");
-        cookie.setDomain("dongnaebangnae.com");
+        cookie.setMaxAge(0);
         response.addCookie(cookie);
 
-        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
-        String cookieAccessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
-        log.info("accessToken : " + headerAccessToken);
-        log.info("cookieAccessToken : " + cookieAccessToken);
-
-        return ResponseEntity.ok("로그아웃 성공");
-
-//
 //        if (StringUtils.hasText(accessToken)) {
 //            log.info("accessToken : " + accessToken);
-//            accessToken = jwtUtil.substringToken(accessToken);
+//            accessToken = accessToken.substring(7);
 //            String refreshToken = redisTool.getValues(accessToken);
 //            if (!refreshToken.equals("false")) {
 //                log.info("refreshToken 삭제.  key = " + accessToken);

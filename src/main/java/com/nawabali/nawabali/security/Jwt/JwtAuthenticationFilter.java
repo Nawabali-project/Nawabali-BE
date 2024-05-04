@@ -9,6 +9,7 @@ import com.nawabali.nawabali.exception.ErrorCode;
 import com.nawabali.nawabali.global.tool.redis.RedisTool;
 import com.nawabali.nawabali.repository.UserRepository;
 import com.nawabali.nawabali.security.UserDetailsImpl;
+import io.jsonwebtoken.Jwt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -73,7 +74,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("user email : " + username, role);
         log.info("accessCookie value : " + accessCookie.getValue());
         log.info("refreshCookie value : " + refreshCookie.getValue());
-
+        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, String.format("%s; Secure; SameSite=None;",token));
 
         // refresh 토큰 redis에 저장

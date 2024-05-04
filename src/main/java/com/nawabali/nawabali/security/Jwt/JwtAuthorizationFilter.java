@@ -70,7 +70,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     String newRefreshToken = jwtUtil.createRefreshToken(email);
                     Cookie newAcessCookie = jwtUtil.createAccessCookie(newAccessToken);
                     log.info("발급한 유저의 email : " + email);
-
+                    res.addHeader(JwtUtil.AUTHORIZATION_HEADER, newAccessToken);
                     res.addHeader(JwtUtil.AUTHORIZATION_HEADER, String.format("%s; Secure; SameSite=None;",newAccessToken));
 
                     redisTool.deleteValues(accessToken);

@@ -16,6 +16,7 @@ import com.nawabali.nawabali.repository.ProfileImageRepository;
 import com.nawabali.nawabali.repository.UserRepository;
 import com.nawabali.nawabali.repository.elasticsearch.UserSearchRepository;
 import com.nawabali.nawabali.security.Jwt.JwtUtil;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,27 +50,33 @@ public class UserService {
     private final RedisTool redisTool;
 
     public ResponseEntity<String> logout(String accessToken, HttpServletResponse response) {
-        if (StringUtils.hasText(accessToken)) {
-            log.info("accessToken : " + accessToken);
-            accessToken = accessToken.substring(7);
-            String refreshToken = redisTool.getValues(accessToken);
-            if (!refreshToken.equals("false")) {
-                log.info("refreshToken 삭제.  key = " + accessToken);
-                redisTool.deleteValues(accessToken);
-
-                //access의 남은 유효시간만큼  redis에 블랙리스트로 저장
-                log.info("redis에 블랙리스트 저장");
-                Long remainedExpiration = jwtUtil.getUserInfoFromToken(accessToken).getExpiration().getTime();
-                Long now = new Date().getTime();
-                if (remainedExpiration > now) {
-                    long newExpiration = remainedExpiration - now;
-                    redisTool.setValues(accessToken, "logout", Duration.ofMillis(newExpiration));
-                }
-            }
-        }
 
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
+        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         return ResponseEntity.ok(accessToken);
+//        if (StringUtils.hasText(accessToken)) {
+//            log.info("accessToken : " + accessToken);
+//            accessToken = accessToken.substring(7);
+//            String refreshToken = redisTool.getValues(accessToken);
+//            if (!refreshToken.equals("false")) {
+//                log.info("refreshToken 삭제.  key = " + accessToken);
+//                redisTool.deleteValues(accessToken);
+//
+//                //access의 남은 유효시간만큼  redis에 블랙리스트로 저장
+//                log.info("redis에 블랙리스트 저장");
+//                Long remainedExpiration = jwtUtil.getUserInfoFromToken(accessToken).getExpiration().getTime();
+//                Long now = new Date().getTime();
+//                if (remainedExpiration > now) {
+//                    long newExpiration = remainedExpiration - now;
+//                    redisTool.setValues(accessToken, "logout", Duration.ofMillis(newExpiration));
+//                }
+//            }
+//        }
+
+
     }
 
     @Transactional

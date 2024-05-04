@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.nawabali'
-version = '1.0.1-SNAPSHOT-' + new Date().format("yyyy-MM-dd-HHmmss")
+version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '17'
@@ -23,12 +23,15 @@ repositories {
 
 dependencies {
 
+	// thumbnailator
+	implementation 'net.coobird:thumbnailator:0.4.14'
+
 	//cache
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
 
 	// elastic search
-//	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
-	implementation 'org.springframework.data:spring-data-elasticsearch:4.2.2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+//	implementation 'org.springframework.data:spring-data-elasticsearch:4.2.2'
 
 	// Querydsl 추가
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
@@ -80,8 +83,7 @@ dependencies {
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-	// thumbnailator
-	implementation 'net.coobird:thumbnailator:0.4.14'
+
 }
 
 // Querydsl 설정부

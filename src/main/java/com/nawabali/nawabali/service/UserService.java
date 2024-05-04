@@ -52,14 +52,14 @@ public class UserService {
     private final JwtUtil jwtUtil;
     private final RedisTool redisTool;
 
-    public ResponseEntity<String> logout(String accessToken, HttpServletResponse response) {
+    public void logout( HttpServletResponse response) {
 
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return ResponseEntity.ok(accessToken);
+
 //        if (StringUtils.hasText(accessToken)) {
 //            log.info("accessToken : " + accessToken);
 //            accessToken = accessToken.substring(7);

@@ -35,8 +35,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response){
-        return userService.logout(request, response);
+    public void logout( HttpServletResponse response){
+        userService.logout( response);
     }
 
     @PostMapping("/signup")

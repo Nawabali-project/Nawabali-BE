@@ -123,8 +123,8 @@ public class WebSecurityConfig {
         );
 
         http.logout(logoutconfigurer->logoutconfigurer
-                .logoutUrl("/users/logout")
-                .addLogoutHandler(jwtLogoutHandler));
+                .logoutUrl("/users/logout"));
+//                .addLogoutHandler(jwtLogoutHandler));
 
         // 필터 관리
         http.addFilterBefore(jwtExceptionHandlerFilter(), JwtAuthenticationFilter.class);

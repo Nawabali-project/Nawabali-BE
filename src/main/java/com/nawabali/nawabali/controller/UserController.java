@@ -34,10 +34,10 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-//    @PostMapping("/logout")
-//    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response){
-//        return userService.logout(request, response);
-//    }
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response){
+        return userService.logout(request, response);
+    }
 
     @PostMapping("/signup")
     @Operation(summary = "회원가입", description = "회원가입에 사용하는 API")

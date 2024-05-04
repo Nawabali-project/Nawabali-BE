@@ -13,6 +13,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -120,7 +121,23 @@ public class JwtUtil {
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
         cookie.setMaxAge(ACCESS_EXPIRATION_TIME);
+        cookie.setDomain("dongnaebangnae.com");
+
         return cookie;
+    }
+
+
+    public String createResponseCookie(String token) {
+        String accessToken = URLEncoder.encode(token, UTF_8);
+        ResponseCookie cookie = ResponseCookie.from(AUTHORIZATION_HEADER, accessToken)
+                .path("/")
+                .secure(true)
+                .httpOnly(true)
+                .maxAge(ACCESS_EXPIRATION_TIME)
+                .domain("dongnaebangnae.com")
+                .sameSite("None")
+                .build();
+        return cookie.toString();
     }
 
     // header 에서 JWT 가져오기
@@ -129,7 +146,7 @@ public class JwtUtil {
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
-        return null;
+        return bearerToken;
     }
 
     // 토큰 검증
@@ -178,7 +195,7 @@ public class JwtUtil {
         if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
             return token.substring(7);
         }
-        throw new NullPointerException("Not Found Token");
+        return null;
     }
 
 

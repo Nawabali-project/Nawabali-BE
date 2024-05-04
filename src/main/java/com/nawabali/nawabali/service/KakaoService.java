@@ -61,7 +61,7 @@ public class KakaoService {
     @Transactional
     public void kakaoLogin(String code , HttpServletResponse response) throws JsonProcessingException, IOException {
         // 1. "인가 코드"로 "액세스 토큰" 요청
-        String accessToken = getAccessToken(code, develop);
+        String accessToken = getAccessToken(code, release);
 
         // 2. 필요시에 회원가입 및 위치 정보(address 값) 저장
         User kakaoUser = registerKakaoUserIfNeeded(accessToken);
@@ -168,7 +168,8 @@ public class KakaoService {
 
         // 7. refresh 토큰 redis에 저장
         redisTool.setValues(token.substring(7),
-                refreshCookie.getValue(),
+//        redisTool.setValues(token,
+                        refreshCookie.getValue(),
                 Duration.ofMillis(jwtUtil.REFRESH_EXPIRATION_TIME));
 
         return token;

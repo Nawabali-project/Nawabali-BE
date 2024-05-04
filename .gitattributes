@@ -5,3 +5,4 @@ scripts/profile.sh merge=ours
 scripts/start.sh merge=ours
 scripts/stop.sh merge=ours
 scripts/switch.sh merge=ours
+src/main/java/com/nawabali/nawabali/config/WebSecurityConfig.java merge=ours

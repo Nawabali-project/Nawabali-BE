@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface PostSearchRepository extends ElasticsearchRepository<PostSearch,Long>,CrudRepository<PostSearch, Long> {
+public interface PostSearchRepository extends ElasticsearchRepository<PostSearch,Long>, CrudRepository<PostSearch, Long> {
     Page<PostSearch> findByContentsContaining(String contents, Pageable pageable);
     void deleteByPostId(Long postId);
 }

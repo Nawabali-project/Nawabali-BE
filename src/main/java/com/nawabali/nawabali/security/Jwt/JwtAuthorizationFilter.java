@@ -68,8 +68,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     // 새로운 access, refresh Token 발행
                     String newAccessToken = jwtUtil.createAccessToken(email, role);
                     String newRefreshToken = jwtUtil.createRefreshToken(email);
-                    Cookie newAcessCookie = jwtUtil.createAccessCookie(newAccessToken);
                     log.info("발급한 유저의 email : " + email);
+
                     res.addHeader(JwtUtil.AUTHORIZATION_HEADER, newAccessToken);
 //                    res.addHeader(JwtUtil.AUTHORIZATION_HEADER, String.format("%s; Secure; HttpOnly; SameSite=None;",newAccessToken));
 

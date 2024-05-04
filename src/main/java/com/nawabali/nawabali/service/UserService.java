@@ -4,6 +4,7 @@ import com.nawabali.nawabali.constant.*;
 import com.nawabali.nawabali.domain.User;
 import com.nawabali.nawabali.domain.elasticsearch.UserSearch;
 import com.nawabali.nawabali.domain.image.ProfileImage;
+import com.nawabali.nawabali.dto.OAuthDto;
 import com.nawabali.nawabali.dto.PostDto;
 import com.nawabali.nawabali.dto.SignupDto;
 import com.nawabali.nawabali.dto.UserDto;
@@ -16,8 +17,10 @@ import com.nawabali.nawabali.repository.ProfileImageRepository;
 import com.nawabali.nawabali.repository.UserRepository;
 import com.nawabali.nawabali.repository.elasticsearch.UserSearchRepository;
 import com.nawabali.nawabali.security.Jwt.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -49,14 +52,14 @@ public class UserService {
     private final JwtUtil jwtUtil;
     private final RedisTool redisTool;
 
-    public ResponseEntity<String> logout(String accessToken, HttpServletResponse response) {
+    public void logout( HttpServletResponse response) {
 
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        return ResponseEntity.ok(accessToken);
+
 //        if (StringUtils.hasText(accessToken)) {
 //            log.info("accessToken : " + accessToken);
 //            accessToken = accessToken.substring(7);
@@ -261,4 +264,12 @@ public class UserService {
                 .toList();
     }
 
+    public OAuthDto.oAuthResponseDto getOAuthUserInfo(User user, HttpServletRequest request, HttpServletResponse response) {
+        String cookieFromAccesstoken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
+        log.info("cookie Token : " + cookieFromAccesstoken);
+        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, cookieFromAccesstoken);
+
+        User existUser = getUserId(user.getId());
+        return new OAuthDto.oAuthResponseDto(existUser);
+    }
 }

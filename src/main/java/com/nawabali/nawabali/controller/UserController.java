@@ -6,6 +6,7 @@ import com.nawabali.nawabali.domain.elasticsearch.UserSearch;
 import com.nawabali.nawabali.dto.PostDto;
 import com.nawabali.nawabali.dto.SignupDto;
 import com.nawabali.nawabali.dto.UserDto;
+import com.nawabali.nawabali.dto.OAuthDto;
 import com.nawabali.nawabali.security.UserDetailsImpl;
 import com.nawabali.nawabali.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,8 +35,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestParam(name = "accessToken", required = false) String accessToken, HttpServletResponse response){
-        return userService.logout(accessToken, response);
+    public void logout( HttpServletResponse response){
+        userService.logout( response);
     }
 
     @PostMapping("/signup")
@@ -92,5 +93,9 @@ public class UserController {
         return userService.searchNickname(nickname);
     }
 
+    @GetMapping("/authenticate")
+    public OAuthDto.oAuthResponseDto getOAuthUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails, HttpServletRequest request, HttpServletResponse response){
+        return userService.getOAuthUserInfo(userDetails.getUser(), request, response);
+    }
 
 }

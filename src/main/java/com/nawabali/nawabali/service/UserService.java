@@ -60,9 +60,9 @@ public class UserService {
 //        cookie.setDomain("dongnaebangnae.com");
         response.addCookie(cookie);
 
-        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
+//        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
 //        String cookieAccessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
-        log.info("accessToken : " + headerAccessToken);
+//        log.info("accessToken : " + headerAccessToken);
 //        log.info("cookieAccessToken : " + cookieAccessToken);
 
         return ResponseEntity.ok("로그아웃 성공");

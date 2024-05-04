@@ -57,12 +57,16 @@ public class UserService {
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
-        cookie.setDomain("dongnaebangnae.com");
+//        cookie.setDomain("dongnaebangnae.com");
         response.addCookie(cookie);
+
+        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
+        String cookieAccessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
+        log.info("accessToken : " + headerAccessToken);
+        log.info("cookieAccessToken : " + cookieAccessToken);
+
         return ResponseEntity.ok("로그아웃 성공");
-//        String accessToken = jwtUtil.getJwtFromHeader(request);
-//        String accessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
-//        log.info("accessToken : " + accessToken);
+
 //
 //        if (StringUtils.hasText(accessToken)) {
 //            log.info("accessToken : " + accessToken);
@@ -270,7 +274,7 @@ public class UserService {
 
     public OAuthDto.oAuthResponseDto getOAuthUserInfo(User user, HttpServletRequest request, HttpServletResponse response) {
         String cookieFromAccesstoken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
-        log.info("cookie Token : "+ cookieFromAccesstoken);
+        log.info("cookie Token : " + cookieFromAccesstoken);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, cookieFromAccesstoken);
 
         User existUser = getUserId(user.getId());

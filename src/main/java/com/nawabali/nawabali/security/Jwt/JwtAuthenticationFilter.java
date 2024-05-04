@@ -74,7 +74,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("accessCookie value : " + accessCookie.getValue());
         log.info("refreshCookie value : " + refreshCookie.getValue());
 
-        response.addHeader("Set-Cookie", String.format("%s; Secure; ameSite=None;",response.getHeader(JwtUtil.AUTHORIZATION_HEADER)));
+        response.addHeader("Set-Cookie", String.format("%s; Secure; SameSite=None;",token));
 
         // refresh 토큰 redis에 저장
         redisTool.setValues(token.substring(7), refreshCookie.getValue(), Duration.ofMillis(jwtUtil.REFRESH_EXPIRATION_TIME));

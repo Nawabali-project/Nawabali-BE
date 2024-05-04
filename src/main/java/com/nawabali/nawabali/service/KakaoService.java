@@ -59,7 +59,7 @@ public class KakaoService {
     private String clientId;
 
     @Transactional
-    public String kakaoLogin(String code , HttpServletResponse response) throws JsonProcessingException, IOException {
+    public void kakaoLogin(String code , HttpServletResponse response) throws JsonProcessingException, IOException {
         // 1. "인가 코드"로 "액세스 토큰" 요청
         String accessToken = getAccessToken(code, develop);
 
@@ -69,7 +69,7 @@ public class KakaoService {
         log.info("userinfo : " + kakaoUser.getEmail());
 
         // 3. 로그인 JWT 토큰 발행 및 리프레시 토큰 저장
-        return jwtTokenCreate(kakaoUser,response);
+        jwtTokenCreate(kakaoUser,response);
     }
 
     // 토큰을 요청하고 카카오 서버에서 토큰을 발급 받음- post요청
@@ -162,8 +162,8 @@ public class KakaoService {
         log.info("accessCookie value : " + accessCookie.getValue());
         log.info("refreshCookie value : " + refreshCookie.getValue());
         // 6. 헤더 및 쿠키에 저장
-        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
-        response.addCookie(accessCookie);
+        response.addHeader("Set-Cookie", String.format("%s; Secure; SameSite=None;",token));
+
 
         // 7. refresh 토큰 redis에 저장
         redisTool.setValues(token.substring(7),

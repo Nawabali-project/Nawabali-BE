@@ -163,7 +163,7 @@ public class KakaoService {
         log.info("refreshCookie value : " + refreshCookie.getValue());
         // 6. 헤더 및 쿠키에 저장
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
-        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, String.format("%s; Secure; SameSite=None;",token));
+        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, String.format("%s; Secure; HttpOnly; SameSite=None;",token));
 
 
         // 7. refresh 토큰 redis에 저장

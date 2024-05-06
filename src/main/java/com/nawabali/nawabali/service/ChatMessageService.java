@@ -129,7 +129,7 @@ public class ChatMessageService {
 
                 messagingTemplate.convertAndSend("/sub/chat/room/" + chatRoomId, chatMessageResponseDto);
                 notificationService.notifyMessage(chatRoom.getId(), receiver, userOptional.getNickname());
-                log.info("알림으로 보낸다 : " );
+                log.info("알림으로 보낸다 ::::::::::::::: " );
             }
 
             notificationService.notifyAllMyMessage(userOptional.getNickname());

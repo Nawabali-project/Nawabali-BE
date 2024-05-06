@@ -51,7 +51,7 @@ public class UserService {
     private final JwtUtil jwtUtil;
     private final RedisTool redisTool;
 
-    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
 
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
@@ -59,33 +59,32 @@ public class UserService {
         cookie.setPath("/");
         cookie.setDomain("dongnaebangnae.com");
         response.addCookie(cookie);
-        return ResponseEntity.ok("로그아웃 성공");
 
 //        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
-//        String cookieAccessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
+        String accessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
 //        log.info("accessToken : " + headerAccessToken);
-//        log.info("cookieAccessToken : " + cookieAccessToken);
+        log.info("cookieAccessToken : " + accessToken);
 
 
-//
-//        if (StringUtils.hasText(accessToken)) {
-//            log.info("accessToken : " + accessToken);
-//            accessToken = jwtUtil.substringToken(accessToken);
-//            String refreshToken = redisTool.getValues(accessToken);
-//            if (!refreshToken.equals("false")) {
-//                log.info("refreshToken 삭제.  key = " + accessToken);
-//                redisTool.deleteValues(accessToken);
-//
-//                //access의 남은 유효시간만큼  redis에 블랙리스트로 저장
-//                log.info("redis에 블랙리스트 저장");
-//                Long remainedExpiration = jwtUtil.getUserInfoFromToken(accessToken).getExpiration().getTime();
-//                Long now = new Date().getTime();
-//                if (remainedExpiration > now) {
-//                    long newExpiration = remainedExpiration - now;
-//                    redisTool.setValues(accessToken, "logout", Duration.ofMillis(newExpiration));
-//                }
-//            }
-//        }
+
+        if (StringUtils.hasText(accessToken)) {
+            log.info("accessToken : " + accessToken);
+            accessToken = jwtUtil.substringToken(accessToken);
+            String refreshToken = redisTool.getValues(accessToken);
+            if (!refreshToken.equals("false")) {
+                log.info("refreshToken 삭제.  key = " + accessToken);
+                redisTool.deleteValues(accessToken);
+
+                //access의 남은 유효시간만큼  redis에 블랙리스트로 저장
+                log.info("redis에 블랙리스트 저장");
+                Long remainedExpiration = jwtUtil.getUserInfoFromToken(accessToken).getExpiration().getTime();
+                Long now = new Date().getTime();
+                if (remainedExpiration > now) {
+                    long newExpiration = remainedExpiration - now;
+                    redisTool.setValues(accessToken, "logout", Duration.ofMillis(newExpiration));
+                }
+            }
+        }
 
 
     }

@@ -54,6 +54,9 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ProfileImage profileImage;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE}, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
+
     @OneToMany(mappedBy = "user" ,  fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<BookMark> bookMarks = new ArrayList<>();
 

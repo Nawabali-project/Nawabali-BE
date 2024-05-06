@@ -71,7 +71,4 @@ public class Post {
     }
 
 
-    public void updateImages(List<PostImage> existsImages) {
-        this.images = existsImages;
-    }
 }

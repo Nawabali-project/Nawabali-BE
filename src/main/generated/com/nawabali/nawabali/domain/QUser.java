@@ -38,6 +38,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath password = createString("password");
 
+    public final ListPath<Post, QPost> posts = this.<Post, QPost>createList("posts", Post.class, QPost.class, PathInits.DIRECT2);
+
     public final com.nawabali.nawabali.domain.image.QProfileImage profileImage;
 
     public final EnumPath<com.nawabali.nawabali.constant.UserRankEnum> rank = createEnum("rank", com.nawabali.nawabali.constant.UserRankEnum.class);

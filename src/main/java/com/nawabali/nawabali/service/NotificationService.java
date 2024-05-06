@@ -106,8 +106,9 @@ public class NotificationService {
                         .build();
 
                 notificationRepository.save(notification);
-                log.info("알림 저장 됐쓰여" + notification);
                 notificationCounts.put(userId, notificationCounts.getOrDefault(userId,0) + 1);
+                log.info("알림 저장 됐쓰여 :" + notification);
+                log.info("알림 카운트는?? :" + notificationCounts);
             } catch (Exception e) {
                 NotificationController.sseEmitters.remove(userId);
             }

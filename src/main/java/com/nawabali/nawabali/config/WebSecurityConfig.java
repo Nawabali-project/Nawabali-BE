@@ -19,6 +19,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.security.web.header.writers.frameoptions.WhiteListedAllowFromStrategy;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
@@ -122,9 +123,9 @@ public class WebSecurityConfig {
                                 .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
-//        http.logout(logoutconfigurer->logoutconfigurer
-//                .logoutUrl("/users/logout"));
-//                .addLogoutHandler(jwtLogoutHandler));
+        http.logout(logoutconfigurer->logoutconfigurer
+                .addLogoutHandler(jwtLogoutHandler)
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()));
 
         // 필터 관리
         http.addFilterBefore(jwtExceptionHandlerFilter(), JwtAuthenticationFilter.class);

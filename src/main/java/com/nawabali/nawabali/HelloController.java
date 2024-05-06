@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping("/ping")
     public String check() {
-        return "Pong! http 로그아웃url 메서드 사용 변경";
+        return "Pong! 서버 업그레이드 이전 3";
     }
 }

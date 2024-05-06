@@ -75,8 +75,8 @@ public class WebSecurityConfig {
                             "http://127.0.0.1:3000", "http://127.0.0.1:5500", "http://127.0.0.1:5000",
                             "http://hhboard.shop", "https://hhboard.shop", "https://vercel-nu-lyart.vercel.app", // 프론트엔드 주소 추가 필요
                             "https://hh-99-nawabali-fe.vercel.app", "https://nawabali-fe.vercel.app",
-                            "https://www.dongnaebangnae.com", "https://prod.dongnaebangnae.com",  "https://dongnaebangnae.vercel.app"
-
+                            "https://www.dongnaebangnae.com", "https://prod.dongnaebangnae.com",  "https://dongnaebangnae.vercel.app",
+                            "https://api.dongnaebangnae.com"
                     )
             );
             configuration.setAllowedMethods(Collections.singletonList("*"));
@@ -122,8 +122,8 @@ public class WebSecurityConfig {
                                 .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
-        http.logout(logoutconfigurer->logoutconfigurer
-                .logoutUrl("/users/logout"));
+//        http.logout(logoutconfigurer->logoutconfigurer
+//                .logoutUrl("/users/logout"));
 //                .addLogoutHandler(jwtLogoutHandler));
 
         // 필터 관리

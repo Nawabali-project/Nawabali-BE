@@ -59,13 +59,13 @@ public class UserService {
         cookie.setPath("/");
         cookie.setDomain("dongnaebangnae.com");
         response.addCookie(cookie);
-
-        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
-        String cookieAccessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
-        log.info("accessToken : " + headerAccessToken);
-        log.info("cookieAccessToken : " + cookieAccessToken);
-
         return ResponseEntity.ok("로그아웃 성공");
+
+//        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
+//        String cookieAccessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);
+//        log.info("accessToken : " + headerAccessToken);
+//        log.info("cookieAccessToken : " + cookieAccessToken);
+
 
 //
 //        if (StringUtils.hasText(accessToken)) {

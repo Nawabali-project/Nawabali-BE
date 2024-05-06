@@ -50,6 +50,9 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookMark> bookMarks = new ArrayList<>();
+
 
     @Builder
     public Post(String contents, LocalDateTime createdAt, LocalDateTime modifiedAt,

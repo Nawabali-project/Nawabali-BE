@@ -41,7 +41,7 @@ public class WebSocketEventListener {
                 chatRoomId = matcher.group(1);
             }
         }
-        log.info("웹소켓 구독 완료");
+        log.info("웹소켓 구독 완료 :" + chatRoomId);
         chatRoomCount.addUser(Long.valueOf(chatRoomId), email);
     }
 
@@ -60,7 +60,7 @@ public class WebSocketEventListener {
             String chatRoomIdString = chatRoomIdList.get(0);
             chatRoomId = Long.valueOf(chatRoomIdString);
         }
-        log.info("웹소켓 구독 끊김!!!!");
+        log.info("웹소켓 구독 끊김!!!! :" + chatRoomId);
        chatRoomCount.outUser(Long.valueOf(chatRoomId),email);
     }
 }

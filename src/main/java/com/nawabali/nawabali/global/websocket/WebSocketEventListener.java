@@ -1,7 +1,6 @@
 package com.nawabali.nawabali.global.websocket;
 
 import com.nawabali.nawabali.service.NotificationService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.security.core.Authentication;
@@ -13,14 +12,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Slf4j
 @Component
 public class WebSocketEventListener {
 
     private final WebSocketChatRoomCount chatRoomCount;
+    private final NotificationService notificationService;
 
-    public WebSocketEventListener (WebSocketChatRoomCount chatRoomCount) {
+    public WebSocketEventListener (WebSocketChatRoomCount chatRoomCount, NotificationService notificationService) {
         this.chatRoomCount = chatRoomCount;
+        this.notificationService = notificationService;
     }
 
     @EventListener
@@ -41,7 +41,6 @@ public class WebSocketEventListener {
                 chatRoomId = matcher.group(1);
             }
         }
-        log.info("웹소켓 구독 됨!");
         chatRoomCount.addUser(Long.valueOf(chatRoomId), email);
     }
 
@@ -60,7 +59,6 @@ public class WebSocketEventListener {
             String chatRoomIdString = chatRoomIdList.get(0);
             chatRoomId = Long.valueOf(chatRoomIdString);
         }
-        log.info("웹소켓 구독 끊어짐!");
        chatRoomCount.outUser(Long.valueOf(chatRoomId),email);
     }
 }

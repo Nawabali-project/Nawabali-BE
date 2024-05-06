@@ -53,12 +53,12 @@ public class UserService {
 
     public void logout(HttpServletRequest request, HttpServletResponse response) {
 
-        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
-        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        cookie.setDomain("dongnaebangnae.com");
-        response.addCookie(cookie);
+//        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
+//        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
+//        cookie.setMaxAge(0);
+//        cookie.setPath("/");
+//        cookie.setDomain("dongnaebangnae.com");
+//        response.addCookie(cookie);
 
 //        String headerAccessToken = jwtUtil.getJwtFromHeader(request);
         String accessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);

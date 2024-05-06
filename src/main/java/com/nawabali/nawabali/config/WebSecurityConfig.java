@@ -126,7 +126,9 @@ public class WebSecurityConfig {
         http.logout(logoutconfigurer->logoutconfigurer
                 .logoutUrl("/users/logout")
 //                .addLogoutHandler(jwtLogoutHandler)
-                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()));
+                .deleteCookies(JwtUtil.AUTHORIZATION_HEADER)
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
+        ;
 
         // 필터 관리
         http.addFilterBefore(jwtExceptionHandlerFilter(), JwtAuthenticationFilter.class);

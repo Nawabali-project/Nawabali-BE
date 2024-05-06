@@ -83,6 +83,7 @@ public class ChatMessageService {
                         .isReceiverRead(true)
                         .build();
                 chatMessageRepository.save(sendMessage);
+                log.info("현재 채팅방에 2명 있음 : 알림 XX :" + memberInRoom);
 
                 ChatMessageResponseDto chatMessageResponseDto = ChatMessageResponseDto.builder()
                         .id(sendMessage.getId())
@@ -111,6 +112,7 @@ public class ChatMessageService {
                         .build();
                 chatMessageRepository.save(sendMessage);
                 log.info("저장확인" + sendMessage);
+                log.info("현재 채팅방에 1명 있음 : 알림 저장되야 함 :" + memberInRoom);
                 log.info("현재시간" + LocalDateTime.now());
 
                 ChatMessageResponseDto chatMessageResponseDto = ChatMessageResponseDto.builder()
@@ -127,6 +129,7 @@ public class ChatMessageService {
 
                 messagingTemplate.convertAndSend("/sub/chat/room/" + chatRoomId, chatMessageResponseDto);
                 notificationService.notifyMessage(chatRoom.getId(), receiver, userOptional.getNickname());
+                log.info("알림으로 보낸다 ::::::::::::::: " );
             }
 
             notificationService.notifyAllMyMessage(userOptional.getNickname());

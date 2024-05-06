@@ -123,12 +123,12 @@ public class WebSecurityConfig {
                                 .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
-        http.logout(logoutconfigurer->logoutconfigurer
-                .logoutUrl("/users/logout")
+//        http.logout(logoutconfigurer->logoutconfigurer
+//                .logoutUrl("/users/logout")
 //                .addLogoutHandler(jwtLogoutHandler)
-                .deleteCookies(JwtUtil.AUTHORIZATION_HEADER)
-                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
-        ;
+//                .deleteCookies(JwtUtil.AUTHORIZATION_HEADER)
+//                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
+//        ;
 
         // 필터 관리
         http.addFilterBefore(jwtExceptionHandlerFilter(), JwtAuthenticationFilter.class);

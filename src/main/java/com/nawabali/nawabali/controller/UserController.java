@@ -36,7 +36,7 @@ public class UserController {
 
     @PostMapping("/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response){
-        userService.logout(request, response);
+         userService.logout(request, response);
     }
 
     @PostMapping("/signup")

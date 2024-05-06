@@ -61,6 +61,7 @@ public class WebSocketEventListener {
             chatRoomId = Long.valueOf(chatRoomIdString);
         }
         log.info("웹소켓 구독 끊김!!!! :" + chatRoomId);
+        log.info("웹소켓 네이티브 헤더 뭐가 들어있는지 : "+ accessor);
        chatRoomCount.outUser(Long.valueOf(chatRoomId),email);
     }
 }

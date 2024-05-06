@@ -83,7 +83,7 @@ public class ChatMessageService {
                         .isReceiverRead(true)
                         .build();
                 chatMessageRepository.save(sendMessage);
-                log.info("현재 채팅방에 2명 있음 : 알림 XX");
+                log.info("현재 채팅방에 2명 있음 : 알림 XX :" + memberInRoom);
 
                 ChatMessageResponseDto chatMessageResponseDto = ChatMessageResponseDto.builder()
                         .id(sendMessage.getId())
@@ -113,7 +113,7 @@ public class ChatMessageService {
                 chatMessageRepository.save(sendMessage);
                 log.info("저장확인" + sendMessage);
                 log.info("현재시간" + LocalDateTime.now());
-                log.info("현재 채팅방에 1명 있음 : 알림 저장되야 함");
+                log.info("현재 채팅방에 1명 있음 : 알림 저장되야 함 :" + memberInRoom);
 
                 ChatMessageResponseDto chatMessageResponseDto = ChatMessageResponseDto.builder()
                         .id(sendMessage.getId())

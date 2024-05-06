@@ -55,7 +55,7 @@ public class WebSocketEventListener {
         assert  authentication != null;
         String email = authentication.getName();
 
-        List<String> chatRoomIdList = accessor.getNativeHeader("chatRoomId");
+        List<String> chatRoomIdList = accessor.getNativeHeader("roomId");
         if (chatRoomIdList != null && !chatRoomIdList.isEmpty()) {
             String chatRoomIdString = chatRoomIdList.get(0);
             chatRoomId = Long.valueOf(chatRoomIdString);

@@ -62,6 +62,13 @@ public class WebSocketEventListener {
         }
         log.info("웹소켓 구독 끊김!!!! :" + chatRoomId);
         log.info("웹소켓 네이티브 헤더 뭐가 들어있는지 : "+ accessor);
-       chatRoomCount.outUser(Long.valueOf(chatRoomId),email);
+//       chatRoomCount.outUser(Long.valueOf(chatRoomId),email);
+        if (chatRoomId != null) {
+            chatRoomCount.outUser(chatRoomId, email);
+        } else {
+            // chatRoomId가 null일 때의 처리
+            // 예: 오류 처리, 로깅 등
+            log.error("chatRoomId가 null입니다. 처리할 수 없습니다.");
+        }
     }
 }

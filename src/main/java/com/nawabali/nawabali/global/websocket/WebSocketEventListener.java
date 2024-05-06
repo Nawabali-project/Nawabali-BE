@@ -1,6 +1,7 @@
 package com.nawabali.nawabali.global.websocket;
 
 import com.nawabali.nawabali.service.NotificationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.security.core.Authentication;
@@ -12,15 +13,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Component
 public class WebSocketEventListener {
 
     private final WebSocketChatRoomCount chatRoomCount;
-    private final NotificationService notificationService;
 
-    public WebSocketEventListener (WebSocketChatRoomCount chatRoomCount, NotificationService notificationService) {
+    public WebSocketEventListener (WebSocketChatRoomCount chatRoomCount) {
         this.chatRoomCount = chatRoomCount;
-        this.notificationService = notificationService;
     }
 
     @EventListener
@@ -41,6 +41,7 @@ public class WebSocketEventListener {
                 chatRoomId = matcher.group(1);
             }
         }
+        log.info("웹소켓 구독 완료 :" + chatRoomId);
         chatRoomCount.addUser(Long.valueOf(chatRoomId), email);
     }
 
@@ -54,11 +55,20 @@ public class WebSocketEventListener {
         assert  authentication != null;
         String email = authentication.getName();
 
-        List<String> chatRoomIdList = accessor.getNativeHeader("chatRoomId");
+        List<String> chatRoomIdList = accessor.getNativeHeader("roomId");
         if (chatRoomIdList != null && !chatRoomIdList.isEmpty()) {
             String chatRoomIdString = chatRoomIdList.get(0);
             chatRoomId = Long.valueOf(chatRoomIdString);
         }
-       chatRoomCount.outUser(Long.valueOf(chatRoomId),email);
+        log.info("웹소켓 구독 끊김!!!! :" + chatRoomId);
+        log.info("웹소켓 네이티브 헤더 뭐가 들어있는지 : "+ accessor);
+//       chatRoomCount.outUser(Long.valueOf(chatRoomId),email);
+        if (chatRoomId != null) {
+            chatRoomCount.outUser(chatRoomId, email);
+        } else {
+            // chatRoomId가 null일 때의 처리
+            // 예: 오류 처리, 로깅 등
+            log.error("chatRoomId가 null입니다. 처리할 수 없습니다.");
+        }
     }
 }

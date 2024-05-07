@@ -52,6 +52,7 @@ public class UserService {
     private final RedisTool redisTool;
 
     public void logout(HttpServletRequest request, HttpServletResponse response) {
+        log.info("UserService 접근");
 
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);

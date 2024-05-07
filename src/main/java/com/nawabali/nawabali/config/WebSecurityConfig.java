@@ -125,7 +125,8 @@ public class WebSecurityConfig {
 
         http.logout((logoutconfigurer)->logoutconfigurer
                 .logoutUrl("/users/logout")
-//                .addLogoutHandler(jwtLogoutHandler)
+                .permitAll()
+                .addLogoutHandler(jwtLogoutHandler)
                 .deleteCookies(JwtUtil.AUTHORIZATION_HEADER)
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()))
         ;

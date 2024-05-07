@@ -22,13 +22,13 @@ public class JwtLogoutHandler implements LogoutHandler {
     private final RedisTool redisTool;
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
-        // 쿠키 삭제
-        log.info("쿠키삭제");
-        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
-        response.addCookie(cookie);
+//        // 쿠키 삭제
+//        log.info("쿠키삭제");
+//        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
+//        cookie.setMaxAge(0);
+//        cookie.setPath("/");
+//        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
+//        response.addCookie(cookie);
 
         String headerAccessToken = jwtUtil.getJwtFromHeader(request);
         String cookieAccessToken = jwtUtil.getTokenFromCookieAndName(request, JwtUtil.AUTHORIZATION_HEADER);

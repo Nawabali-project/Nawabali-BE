@@ -52,7 +52,7 @@ public class JwtLogoutHandler implements LogoutHandler {
         Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
-        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, null);
+        cookie.setDomain("dongnaebangnae.com");
         response.addCookie(cookie);
 
 

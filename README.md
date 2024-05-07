@@ -132,7 +132,7 @@
 
 ### 📌 일반 회원가입 시 이메일 인증
 
-![GIFMaker_me-6](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/3239cde3-db66-4806-835a-72e2b7f02585)
+![이메일인증_저화질3gif](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/14f170b3-de06-401c-96a3-b64c9b20561a)
 - 실제 사용 중인 이메일인지 인증 메일을 발송하고, 인증 코드를 발급하여 메일을 인증할 수 있습니다.
     
 ### 📌 소셜 로그인(Kakao)
@@ -173,7 +173,7 @@
 
 
 ## ✅ 동네 소식
-![GIFMaker_me](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/09d8879b-91ed-410f-bc07-17bfd0b230b5)
+![동네 소식_5](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/51a80338-94f4-4de2-9b32-4bbf0868b54e)
 |우리동네 인기글은?|여러동네의 인기들은?|카테고리별로 인기동네는?|
 |:--:|:--:|:--:|
 |![image](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/b7cff42b-ec6f-4379-a98b-a70a47e93859)|![image](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/4c64ec9f-d0ce-4795-abe4-447ecb868ca2)|![image](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/bf8f085b-a8f8-4695-a9bb-263742dc170e)|
@@ -185,19 +185,18 @@
 
 
 ## ✅ 마이페이지
-
-![GIFMaker_me-4](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/08fcdd56-da0e-4d2b-b0a0-db0712b84ffa)
+![프로필편집gif](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/a3d1ee19-9dbd-47fa-abaf-c3988913feef)
 ![회원정보변경짤](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/760e16b3-b3dc-44f7-a9c5-9d1c176b2d33)
 
 - 마이페이지에서 회원 정보를 변경할 수 있습니다.
 - 프로필 사진, 닉네임, 나의 지역을 변경할 수 있습니다.
 
-![GIFMaker_me-2](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/22597347-613f-49bd-9ba0-d158bc761306)
+![00마이페이지 _ 등록한 게시물 확인](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/675f6f3d-9bb0-45a4-b48a-8a434c64a190)
 ![본인게시물확인짤](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/f39b2b0b-85b2-4ca6-8e75-42d8b7ee871d)
 
 - 마이페이지에서 내가 등록한 게시물들을 확인할 수 있습니다.
 
-![GIFMaker_me-3](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/bca8d7b6-1ca1-439e-afe2-9c7c336e2cf1)
+![북마크](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/85842426-1704-49a8-a8cc-4890a0e10e27)
 ![본인의 북마크짤](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/032dd71f-a49d-421f-b9bb-d3cebce953df)
 - 마이페이지에서 내가 등록한 북마크된 게시물들을 볼 수 있습니다.
 
@@ -207,18 +206,18 @@
 
 ## ✅ 실시간 채팅/알림 기능
 
-![GIFMaker_me-5](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/e07ec5be-3391-4f4e-9554-e487d6c9ac3a)
+![채팅검색기능_1](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/c6cfc20b-0f15-49c0-8d29-32069b408b2e)
 ![알림짤](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/f3495696-4fa7-485c-a9fe-4791c814ce10)
 - 채팅방이나 채팅메세지를 통한 검색이 가능합니다.
 
-![GIFMaker_me-7](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/161cae7e-381d-4cba-9fc6-958b018cb923)
+![채팅방 생성gif](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/015ca82d-64d5-4506-a4d4-48acec17a7da)
 - 상대의 이름을 검색하여 채팅방을 생성 할 수 있습니다.
 
-![GIFMaker_me-8](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/aafcfc3e-3d54-46b6-8fcd-62979fc08230)
+![채팅보내기_1](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/0f535f2f-efa4-44d2-b73a-20cd95968402)
 ![알림짤](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/a20de69c-9bba-4a81-a7c7-01ac8ba4c115)
 - 1:1 대화를 할 수 있습니다.
 
-![GIFMaker_me-9](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/2d7b1a2a-87c0-4db8-85e0-61bde1719c7c)
+![채팅알림](https://github.com/Nawabali-project/Nawabali-BE/assets/157681548/627afa58-a336-4168-b726-fff822b495fc)
 ![알림짤](https://github.com/Nawabali-project/Nawabali-BE/assets/105621255/f961b00c-b847-41a2-8d95-a8bcd19a6e8b)
 - 메세지가 오면 상단에 알림으로 표시되어 어떤 페이지에 있어도 메세지가 왔음을 알 수 있습니다. 채팅을 확인하면 알림이 사라지게 됩니다.
 

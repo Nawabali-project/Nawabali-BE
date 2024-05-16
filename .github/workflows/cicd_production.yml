@@ -6,9 +6,9 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2
-  S3_BUCKET_NAME: sparta-project-build
-  CODE_DEPLOY_APPLICATION_NAME: codedeploy
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: deployment-group-dongnaebangnae-upgraded
+  S3_BUCKET_NAME: bucket-build-dongnaebangnae
+  CODE_DEPLOY_APPLICATION_NAME: codedeploy-dongnaebangnae
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: deploygroup-dongnaebangnae
 
 permissions:
   contents: read
